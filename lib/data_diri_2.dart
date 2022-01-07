@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'data_diri.dart';
 
 class DataDiriDua extends StatefulWidget {
-  const DataDiriDua({Key? key}) : super(key: key);
+  const DataDiriDua({Key? key, required this.kewarganegaraan})
+      : super(key: key);
+  final String kewarganegaraan;
 
   @override
   _DataDiriDuaState createState() => _DataDiriDuaState();
@@ -22,8 +24,12 @@ class _DataDiriDuaState extends State<DataDiriDua> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         children: [
-          DataForm(form: 'Aktivitas', form2: 'Bermain Game'),
-          DataForm(form: 'Pekerjaan', form2: 'Desain jamban duduk'),
+          DataForm(form: 'Kewarganegaraan', form2: widget.kewarganegaraan),
+          Row(
+            children: [
+              DataForm(form: 'Lama Tinggal', form2: 'Desain jamban duduk'),
+            ],
+          ),
           DataForm(form: 'Status pekerjaan', form2: 'Kontrak'),
           DataForm(form: "Ijazah", form2: 'Playgroup'),
           DataForm(
@@ -44,10 +50,10 @@ class _DataDiriDuaState extends State<DataDiriDua> {
                 height: 23,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => DataDiri()),
-                    );
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => DataDiri()),
+                    // );
                   },
                   child: Text(
                     '1',
@@ -73,7 +79,10 @@ class _DataDiriDuaState extends State<DataDiriDua> {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => DataDiriDua()),
+                      MaterialPageRoute(
+                          builder: (context) => DataDiriDua(
+                                kewarganegaraan: '',
+                              )),
                     );
                   },
                   child: Text('2'),

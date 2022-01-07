@@ -42,7 +42,7 @@ class _InputNewDataState extends State<InputNewData> {
         backgroundColor: Color(0xFF227471),
         automaticallyImplyLeading: true,
         title: const Text(
-          'Tambah Data Baru',
+          'Isi Data',
         ),
         centerTitle: true,
       ),
@@ -60,9 +60,26 @@ class _InputNewDataState extends State<InputNewData> {
             label: 'Suku Bangsa',
             controller: sukuBangsaController,
           ),
-          LabelTextField(
-            label: 'Agama',
-            controller: agamaController,
+          Padding(
+            padding: const EdgeInsets.only(top: 16, bottom: 16),
+            child: Text(
+              'Agama',
+              style: TextStyle(
+                color: Color(0xFF206766),
+                fontSize: 20.0,
+              ),
+            ),
+          ),
+          DropDownMenu(
+            items: [
+              'Islam',
+              'Kristen',
+              'Katolik',
+              'Hindu',
+              'Buddha',
+              'Khonghucu',
+            ],
+            value: agamaController,
           ),
           TitleLine(
             title: 'Kelahiran',
@@ -149,7 +166,9 @@ class _InputNewDataState extends State<InputNewData> {
                   value: 'Alamat Asli',
                   groupValue: statusAlamat,
                   onChanged: (String? value) {
-                    statusAlamat = value!;
+                    setState(() {
+                      statusAlamat = value!;
+                    });
                   },
                 ),
                 Text(
@@ -170,7 +189,10 @@ class _InputNewDataState extends State<InputNewData> {
                   value: 'Alamat Domisili',
                   groupValue: statusAlamat,
                   onChanged: (String? value) {
-                    statusAlamat = value!;
+                    setState(() {
+                      statusAlamat = value!;
+                    });
+                    ;
                   },
                 ),
                 Text(
@@ -355,10 +377,6 @@ class _InputNewDataState extends State<InputNewData> {
             items: ['Menikah', 'Belum menikah'],
             value: statusPerkawinanController,
           ),
-          LabelTextField(
-            label: 'Status hubungan keluarga',
-            controller: statusPerkawinanController,
-          ),
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: Text(
@@ -374,14 +392,49 @@ class _InputNewDataState extends State<InputNewData> {
             value: pendidikanTerakhirController,
           ),
           LabelTextField(label: 'Pekerjaan', controller: pekerjaanController),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 32),
+              child: Text(
+                'Pastikan semua data sudah diisi dengan benar sebelum mengirim form.',
+                style: TextStyle(
+                  color: Color(0xFF206766),
+                  fontSize: 15.0,
+                ),
+              ),
+            ),
+          ),
           ElevatedButton(
             onPressed: () {
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => DataDiri(),
-              //   ),
-              // );
+              setState(() {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DataDiri(
+                      nama: namaLengkapController.text,
+                      sukubangsa: sukuBangsaController.text,
+                      agama: agamaController.text,
+                      tanggal: tanggalLahirController.text,
+                      tempat: tempatLahirController.text,
+                      kelamin: jenisKelamin,
+                      statusalamat: statusAlamat,
+                      jalan: jalanController.text,
+                      nomor: nomorController.text,
+                      rt: rtController.text,
+                      rw: rwController.text,
+                      kelurahan: kelurahanController.text,
+                      kecamatan: kecamatanController.text,
+                      kabupaten: kabupatenController.text,
+                      provinsi: provinsiController.text,
+                      kewarganegaraan: kewarganegaraanController.text,
+                      lamatinggal: lamaTinggalController.text,
+                      statusPerkawinan: statusPerkawinanController.text,
+                      pendidikan: pendidikanTerakhirController.text,
+                      pekerjaan: pekerjaanController.text,
+                    ),
+                  ),
+                );
+              });
               print(jenisKelamin);
               print(kabupatenController.text);
               print(pekerjaanController.text);

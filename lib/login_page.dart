@@ -67,20 +67,26 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: () {
               if (usernameController.text == "" &&
                   passwordController.text == "") {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: Text('error'),
-                          content: Text('Username dan password harus diisi'),
-                        ));
+                // showDialog(
+                //     context: context,
+                //     builder: (context) => AlertDialog(
+                //           title: Text('error'),
+                //           content: Text('Username dan password harus diisi'),
+                //         ));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Username dan password harus diisi'),
+                ));
               } else if (usernameController.text != username &&
                   passwordController.text != password) {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: Text('error'),
-                          content: Text('Username dan password harus benar'),
-                        ));
+                // showDialog(
+                //     context: context,
+                //     builder: (context) => AlertDialog(
+                //           title: Text('error'),
+                //           content: Text('Username dan password harus benar'),
+                //         ));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Username dan password harus benar'),
+                ));
               } else if (usernameController.text == username &&
                   passwordController.text == password) {
                 Navigator.pushReplacement(
@@ -90,12 +96,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 );
               } else {
-                showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                          title: Text('error'),
-                          content: Text('something error'),
-                        ));
+                // showDialog(
+                //     context: context,
+                //     builder: (context) => AlertDialog(
+                //           title: Text('error'),
+                //           content: Text('something error'),
+                //         ));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Something error'),
+                ));
               }
             },
             child: Text('Login'),

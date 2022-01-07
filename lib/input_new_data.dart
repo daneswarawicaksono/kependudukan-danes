@@ -398,7 +398,7 @@ class _InputNewDataState extends State<InputNewData> {
               child: Text(
                 'Pastikan semua data sudah diisi dengan benar sebelum mengirim form.',
                 style: TextStyle(
-                  color: Color(0xFF206766),
+                  color: Colors.red,
                   fontSize: 15.0,
                 ),
               ),

@@ -66,16 +66,15 @@ class _DataDiriState extends State<DataDiri> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         children: [
-          Row(
-            children: [
-              Text(
-                'Status: Berhasil dikirim!',
-                style: TextStyle(
-                  color: Color(0xFF636363),
-                  fontSize: 14.0,
-                ),
-              ),
-            ],
+          Text(
+            'Status: Berhasil dikirim!',
+            style: TextStyle(
+              color: Color(0xFFFF0000),
+              fontSize: 14.0,
+            ),
+          ),
+          SizedBox(
+            height: 14.0,
           ),
           DataForm(form: 'Nama Lengkap', form2: widget.nama),
           DataForm(form: 'NIK', form2: widget.sukubangsa),

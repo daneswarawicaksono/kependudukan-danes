@@ -11,6 +11,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController usernameController =
+      TextEditingController(text: "");
+  final TextEditingController passwordController =
+      TextEditingController(text: "");
+  String password = 'daneswara2006';
+  String username = 'daneswara';
   @override
   Widget build(BuildContext context) {
     final InputBorder border = OutlineInputBorder(
@@ -33,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         children: [
           Image.asset(
-            'assets/images/sampul.jpg',
+            'assets/images/penduduk.jpg',
             width: 100,
             height: 300,
             fit: BoxFit.contain,
@@ -41,22 +47,56 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: 16,
           ),
-          LoginForm(label: 'Username', border: border),
+          LoginForm(
+            label: 'Username',
+            border: border,
+            controller: usernameController,
+          ),
           SizedBox(
             height: 16,
           ),
-          LoginForm(label: 'Password', border: border),
+          LoginForm(
+            label: 'Password',
+            border: border,
+            controller: passwordController,
+          ),
           SizedBox(
             height: 32,
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => InputNewData(),
-                ),
-              );
+              if (usernameController.text == "" &&
+                  passwordController.text == "") {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: Text('error'),
+                          content: Text('Username dan password harus diisi'),
+                        ));
+              } else if (usernameController.text != username &&
+                  passwordController.text != password) {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: Text('error'),
+                          content: Text('Username dan password harus benar'),
+                        ));
+              } else if (usernameController.text == username &&
+                  passwordController.text == password) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => InputNewData(),
+                  ),
+                );
+              } else {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: Text('error'),
+                          content: Text('something error'),
+                        ));
+              }
             },
             child: Text('Login'),
             style: ElevatedButton.styleFrom(
@@ -77,10 +117,12 @@ class LoginForm extends StatelessWidget {
     Key? key,
     required this.label,
     required this.border,
+    this.controller,
   }) : super(key: key);
 
   final String label;
   final InputBorder border;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +140,7 @@ class LoginForm extends StatelessWidget {
           height: 16.0,
         ),
         TextFormField(
+          controller: controller,
           decoration: InputDecoration(
             border: border,
             hintText: label,
